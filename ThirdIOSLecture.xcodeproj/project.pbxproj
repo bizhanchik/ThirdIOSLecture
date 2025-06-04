@@ -7,13 +7,33 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		FD9B83992DF046520018A965 /* ThirdIOSLecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdIOSLecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD9B83992DF046520018A965 /* ThirdIOSLecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ThirdIOSLecture.app; path = "/Users/bizhan/Desktop/ThirdIOSLecture/build/Debug-iphoneos/ThirdIOSLecture.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FD9B839B2DF046520018A965 /* ThirdIOSLecture */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ThirdIOSLecture;
+			sourceTree = "<group>";
+		};
+		FD9B83AA2DF05C1D0018A965 /* Services */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FD9B83B02DF05DD20018A965 /* Network */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FD9B83B72DF05F3F0018A965 /* Modules */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		FD9B84002DF073C40018A965 /* Components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +53,11 @@
 			isa = PBXGroup;
 			children = (
 				FD9B839B2DF046520018A965 /* ThirdIOSLecture */,
-				FD9B839A2DF046520018A965 /* Products */,
+				FD9B83AA2DF05C1D0018A965 /* Services */,
+				FD9B83B02DF05DD20018A965 /* Network */,
+				FD9B83B72DF05F3F0018A965 /* Modules */,
+				FD9B84002DF073C40018A965 /* Components */,
 			);
-			sourceTree = "<group>";
-		};
-		FD9B839A2DF046520018A965 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FD9B83992DF046520018A965 /* ThirdIOSLecture.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -62,6 +77,10 @@
 			);
 			fileSystemSynchronizedGroups = (
 				FD9B839B2DF046520018A965 /* ThirdIOSLecture */,
+				FD9B83AA2DF05C1D0018A965 /* Services */,
+				FD9B83B02DF05DD20018A965 /* Network */,
+				FD9B83B72DF05F3F0018A965 /* Modules */,
+				FD9B84002DF073C40018A965 /* Components */,
 			);
 			name = ThirdIOSLecture;
 			packageProductDependencies = (
@@ -95,7 +114,7 @@
 			mainGroup = FD9B83902DF046520018A965;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = FD9B839A2DF046520018A965 /* Products */;
+			productRefGroup = FD9B83902DF046520018A965;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
