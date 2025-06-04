@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct CharactersView: View {
-    @State private var characters: [Character] = []
     @StateObject private var viewModel = CharactersViewModel()
-
     
     let columns = [
         GridItem(.flexible()),
@@ -13,20 +11,50 @@ struct CharactersView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                charactersGrid
-                .task {
-                    do {
-                        characters = try await CharacterService().get()
-                    } catch {
-                        print("Ошибка при загрузке персонажей: \(error)")
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(viewModel.characters) { character in
+                            NavigationLink(destination: CharacterDetailsView(character: character)) {
+                                VStack {
+                                    AsyncImage(url: character.image, transaction: Transaction(animation: .easeInOut)) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 150)
+                                                .cornerRadius(10)
+                                        case .failure:
+                                            Image(systemName: "xmark.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 150)
+                                                .foregroundColor(.red)
+                                        @unknown default:
+                                            EmptyView()
+                                        }
+                                    }
+                                    
+                                    Text(character.name)
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                }
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(12)
+                            }
+                        }
                     }
+                    .padding()
                 }
-                
                 
                 VStack {
                     Spacer()
                     
                     HStack(spacing: 16) {
+                        
                         Button {
                             viewModel.goToPreviousPage()
                         } label: {
@@ -41,8 +69,8 @@ struct CharactersView: View {
                         }
 
                         Text("Page \(viewModel.page)")
-                            .foregroundColor(.primary)
                             .font(.headline)
+                            .foregroundColor(.primary)
 
                         Button {
                             viewModel.goToNextPage()
@@ -58,60 +86,18 @@ struct CharactersView: View {
                         }
                     }
                     .frame(height: 56)
-                    .padding(.bottom)
-
+                    .frame(maxWidth:.infinity)
+                    .background(Color(.systemGray6))
+                    
                 }
-                .ignoresSafeArea()
-                
+            }
+            .navigationTitle("Characters")
+            .task {
+                await viewModel.fetchCharacters()
             }
         }
     }
 }
-
-extension CharactersView{
-    var charactersGrid: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(characters) { character in
-                    NavigationLink(destination: CharacterDetailsView(character: character)) {
-                        VStack{
-                            AsyncImage(url: character.image, transaction: Transaction(animation: .easeInOut)) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 150)
-                                        .cornerRadius(10)
-                                case .failure(_):
-                                    Image(systemName: "xmark.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 150)
-                                        .foregroundColor(.red)
-                                @unknown default:
-                                    EmptyView()
-                                }
-                            }
-                            
-                            Text(character.name)
-                                .font(.headline)
-                                .foregroundColor(Color.primary)
-                        }
-                        
-                    }
-                    .padding()
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(12)
-                }
-            }
-            .padding()
-        }
-    }
-}
-
 
 #Preview {
     CharactersView()
