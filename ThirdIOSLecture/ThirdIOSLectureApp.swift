@@ -11,7 +11,7 @@ import SwiftUI
 struct ThirdIOSLectureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharactersView()
         }
     }
 }
